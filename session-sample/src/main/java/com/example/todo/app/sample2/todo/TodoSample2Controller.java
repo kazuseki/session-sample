@@ -59,6 +59,21 @@ public class TodoSample2Controller {
       return "todo/sample2/list2";
   }
   
- 
+  //一覧表示から、新規作成の入力ボックスがある画面に遷移する用。
+  @GetMapping("create2")
+  public String showEnterForm(Model model) {
+
+    // todoServiceを使って、登録している数が全体上限数か確認する。
+    try {
+      todoService.checkCount();
+    } catch (BusinessException e) {
+      model.addAttribute(e.getResultMessages());
+
+      // 例外が起きたら、入力画面に遷移しないで一覧表示画面を再表示する。 
+      return list(model);
+    }
+
+    return "todo/sample2/enter2";
+  }
   
 }
