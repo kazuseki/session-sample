@@ -8,6 +8,10 @@
   text-decoration: line-through;
 }
 
+.inline {
+    display: inline-block;
+}
+
 .alert {
     border: 1px solid;
 }
@@ -52,12 +56,25 @@
     <ul>
       <!-- c:forEachタグを用いて、Todoのリストを箇条書きで全て表示する -->
       <c:forEach items="${todos}" var="todo">
+        <!-- 完了なら取り消し線を装飾する。未完了には何もしない。 -->
         <li><c:choose>
             <c:when test="${todo.finished}">
               <span class="strike"> ${f:h(todo.todoTitle)} </span>
             </c:when>
             <c:otherwise>
                                     ${f:h(todo.todoTitle)}
+                                    <!-- 未完了には完了用のボタンを表示してformを送る -->
+                                    <form:form
+                                        action="${pageContext.request.contextPath}/todo/sample1/finish1"
+                                        method="post"
+                                        modelAttribute="todoForm"
+                                        cssClass="inline">  <!-- cssにより、Todoの横に表示させる -->
+                                        <!-- リクエストパラメータで表示しているtodoIdを送信する -->
+                                        <form:hidden path="todoId"
+                                            value="${f:h(todo.todoId)}" />
+                                        <form:button>Finish</form:button>
+                                    </form:form>
+                            
             </c:otherwise>
           </c:choose></li>
       </c:forEach>
