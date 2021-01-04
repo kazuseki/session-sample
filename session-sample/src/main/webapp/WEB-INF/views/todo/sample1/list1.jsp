@@ -7,6 +7,27 @@
 .strike {
   text-decoration: line-through;
 }
+
+.alert {
+    border: 1px solid;
+}
+
+.alert-error {
+    background-color: #c60f13;
+    border-color: #970b0e;
+    color: white;
+}
+
+.alert-success {
+    background-color: #5da423;
+    border-color: #457a1a;
+    color: white;
+}
+
+.text-error {
+    color: #c60f13;
+}
+
 </style>
 </head>
 <body>
@@ -20,7 +41,7 @@
            action="${pageContext.request.contextPath}/todo/sample1/create1"
             method="post" modelAttribute="todoForm">
             <form:input path="todoTitle" /><!-- path属性と、modelAttributeのフォームのプロパティを、一致させてバインドする -->
-            <form:errors path="todoTitle" /><!-- 入力エラーがあった場合に表示する。 -->
+            <form:errors path="todoTitle" cssClass="text-error" /><!-- 入力エラーがあった場合に表示する。 -->
             <form:button>Create Todo</form:button>
         </form:form>
     </div>
