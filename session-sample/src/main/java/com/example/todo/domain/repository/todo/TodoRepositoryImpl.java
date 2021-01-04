@@ -27,6 +27,7 @@ public class TodoRepositoryImpl implements TodoRepository {
     Todo todo3 = new Todo();
     todo3.setTodoId("3");
     todo3.setTodoTitle("Read a book");
+    todo3.setFinished(true);
     TODO_MAP.put(todo1.getTodoId(), todo1);
     TODO_MAP.put(todo2.getTodoId(), todo2);
     TODO_MAP.put(todo3.getTodoId(), todo3);
