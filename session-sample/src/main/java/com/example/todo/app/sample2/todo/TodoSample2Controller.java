@@ -83,7 +83,7 @@ public class TodoSample2Controller {
   // 新規作成から次へを押して、確認画面を表示する。
   // リクエストパラメータに event_proceed(進行中)があれば動く。
   @PostMapping(value = "create2" , params = "event_proceed")
-  public String showReview(@Validated @ModelAttribute("sessionTodoSample2Form") TodoForm todoForm,
+  public String showReview(@Validated @ModelAttribute("sessionTodoSample2Form") TodoSample2Form todoSample2Form,
       BindingResult bindingResult,
       Model model,
       SessionStatus sessionStatus) {
@@ -101,13 +101,13 @@ public class TodoSample2Controller {
   // 完了後は完了画面へ。
   // 失敗したら入力画面ではなく、一覧画面に戻す
   @PostMapping(value = "create2" , params = "create_complete")
-  public String create(@ModelAttribute("sessionTodoSample2Form") TodoForm todoForm,
+  public String create(@ModelAttribute("sessionTodoSample2Form") TodoSample2Form todoSample2Form,
       Model model,
       RedirectAttributes redirectAttributes,
       SessionStatus sessionStatus) {
 
     // フォームとエンティティをマッピング。
-    Todo todo = beanMapper.map(todoForm, Todo.class);
+    Todo todo = beanMapper.map(todoSample2Form, Todo.class);
 
     // todoServiceを使って登録する。
     // 例外が起きたら、入力画面ではなく一覧画面に戻す
