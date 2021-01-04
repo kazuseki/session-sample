@@ -53,16 +53,19 @@ public class TodoSample2Controller {
 
   // 一覧表示用
   @GetMapping("list2")
-  public String list(Model model) {
-    
-      Collection<Todo> todos = todoService.findAll();
-      model.addAttribute("todos", todos);
-      return "todo/sample2/list2";
+  public String list(Model model, SessionStatus sessionStatus) {
+
+    // 画面表示前に変なものが残っていないよう、sessionに保管している sessionTodoSample2Form を破棄する。
+    sessionStatus.setComplete();
+
+    Collection<Todo> todos = todoService.findAll();
+    model.addAttribute("todos", todos);
+    return "todo/sample2/list2";
   }
   
   //一覧表示から、新規作成の入力ボックスがある画面に遷移する用。
   @GetMapping("create2")
-  public String showEnterForm(Model model) {
+  public String showEnterForm(Model model, SessionStatus sessionStatus) {
 
     // todoServiceを使って、登録している数が全体上限数か確認する。
     try {
@@ -71,7 +74,7 @@ public class TodoSample2Controller {
       model.addAttribute(e.getResultMessages());
 
       // 例外が起きたら、入力画面に遷移しないで一覧表示画面を再表示する。 
-      return list(model);
+      return list(model,sessionStatus);
     }
 
     return "todo/sample2/enter2";
@@ -82,11 +85,12 @@ public class TodoSample2Controller {
   @PostMapping(value = "create" , params = "event_proceed")
   public String showReview(@Validated @ModelAttribute("sessionTodoSample2Form") TodoForm todoForm,
       BindingResult bindingResult,
-      Model model) {
+      Model model,
+      SessionStatus sessionStatus) {
 
     // 入力値検証でエラーがあったら元の画面に返却する。
     if(bindingResult.hasErrors()) {
-      return showEnterForm(model);
+      return showEnterForm(model,sessionStatus);
     }
 
     // 検証が通ったら確認画面へ。
@@ -99,7 +103,8 @@ public class TodoSample2Controller {
   @PostMapping(value = "create" , params = "create_complete")
   public String create(@ModelAttribute("sessionTodoSample2Form") TodoForm todoForm,
       Model model,
-      RedirectAttributes redirectAttributes) {
+      RedirectAttributes redirectAttributes,
+      SessionStatus sessionStatus) {
 
     // フォームとエンティティをマッピング。
     Todo todo = beanMapper.map(todoForm, Todo.class);
@@ -110,7 +115,7 @@ public class TodoSample2Controller {
       todoService.create(todo);
     } catch (BusinessException e) {
       model.addAttribute(e.getResultMessages());
-      return list(model);
+      return list(model,sessionStatus);
     }
 
     // 正常に更新が完了した場合、結果メッセージをflashスコープに追加して、一覧画面でリダイレクトする。
@@ -122,8 +127,8 @@ public class TodoSample2Controller {
     return "redirect:/todo/sample2/complete2";
   }
   
-  //確認画面からキャンセルを押したときに使われる。
-  // ゴミを削除して一覧画面へ。
+  // 確認画面からキャンセルを押したときに使われる。
+  // ゴミを削除して再度、新規作成画面へ。
   @PostMapping(value = "create2" , params = "create_cancel")
   public String cancel(SessionStatus sessionStatus) {
     // キャンセルするとき、セッションに残っているtodoFormオブジェクトを削除する。
