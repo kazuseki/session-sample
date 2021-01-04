@@ -135,4 +135,16 @@ public class TodoSample2Controller {
     sessionStatus.setComplete();
     return "redirect:/todo/sample2/create2";
   }
+  
+  //新規登録の完了画面表示。
+  @GetMapping("complete2")
+  public String showComplete(SessionStatus sessionStatus) {
+    // 使い終わったのでセッションに格納したオブジェクトを削除する。
+    sessionStatus.setComplete();
+    // なお、ここでセッションから削除しても問題ない。
+    // ModelAttribute("sessionTodoForm")オブジェクトはクライアントにレスポンスが返るまで
+    // requestスコープで有効なので、完了画面を初めて表示するまでは、JSPで表示できる。
+    // 完了画面でページ更新(ブラウザでF5など)を行うと、表示は消えてしまう。
+    return "todo/sample/complete2";
+  }
 }
