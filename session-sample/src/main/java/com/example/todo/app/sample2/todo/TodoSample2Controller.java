@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.terasoluna.gfw.common.exception.BusinessException;
 import org.terasoluna.gfw.common.message.ResultMessage;
@@ -121,4 +122,12 @@ public class TodoSample2Controller {
     return "redirect:/todo/sample2/complete2";
   }
   
+  //確認画面からキャンセルを押したときに使われる。
+  // ゴミを削除して一覧画面へ。
+  @PostMapping(value = "create2" , params = "create_cancel")
+  public String cancel(SessionStatus sessionStatus) {
+    // キャンセルするとき、セッションに残っているtodoFormオブジェクトを削除する。
+    sessionStatus.setComplete();
+    return "redirect:/todo/sample/create";
+  }
 }
