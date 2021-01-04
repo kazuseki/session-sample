@@ -33,7 +33,7 @@ public class TodoSample1Controller {
   public String list(Model model) {
       Collection<Todo> todos = todoService.findAll();
       model.addAttribute("todos", todos);
-      return "todo/list";
+      return "todo/sample1/list1";
   }
   
 }
