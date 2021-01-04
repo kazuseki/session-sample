@@ -17,10 +17,16 @@ public class TodoForm implements Serializable {
   public static interface TodoFinish {
   };
 
+  // 削除処理用。
+  public static interface TodoDelete {
+  }
+  
   private static final long serialVersionUID = 1L;
 
-  //アノテーションのgroup属性に、グループを示す任意のjava.lang.Classオブジェクトを設定する
-  @NotNull(groups = { TodoFinish.class })
+  // アノテーションのgroup属性に、グループを示す任意のjava.lang.Classオブジェクトを設定する
+  // 完了処理、削除処理時に一意にTodoを特定するのに使うフィールドのため、
+  // その2つのグループ化を行う。
+  @NotNull(groups = { TodoFinish.class , TodoDelete.class })
   private String todoId;
 
   // アノテーションのgroup属性に、グループを示す任意のjava.lang.Classオブジェクトを設定する
