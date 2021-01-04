@@ -10,6 +10,10 @@
   <div>
     <a href="<c:url value='/todo/sample2/create2' />">新規Todo作成へ (URL /todo/sample2/create2)</a>
   </div>
+  
+  <!-- 結果メッセージを表示する -->
+  <t:messagesPanel />
+        
   <hr />
   
   <div id="todoList">
