@@ -7,7 +7,9 @@
 </head>
 <body>
   <h1>Todo List</h1>
-  
+  <div>
+    <a href="<c:url value='/todo/sample2/create2' />">新規Todo作成へ</a>
+  </div>
   <hr />
   
   <div id="todoList">
