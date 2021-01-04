@@ -14,7 +14,10 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.terasoluna.gfw.common.exception.BusinessException;
+import org.terasoluna.gfw.common.message.ResultMessage;
+import org.terasoluna.gfw.common.message.ResultMessages;
 
 import java.util.Collection;
 
@@ -87,6 +90,35 @@ public class TodoSample2Controller {
 
     // 検証が通ったら確認画面へ。
     return "todo/sample2/confirm2";
+  }
+  
+  // 確認画面からOKを押して実際に登録する。
+  // 完了後は完了画面へ。
+  // 失敗したら入力画面ではなく、一覧画面に戻す
+  @PostMapping(value = "create" , params = "create_complete")
+  public String create(@ModelAttribute("sessionTodoSample2Form") TodoForm todoForm,
+      Model model,
+      RedirectAttributes redirectAttributes) {
+
+    // フォームとエンティティをマッピング。
+    Todo todo = beanMapper.map(todoForm, Todo.class);
+
+    // todoServiceを使って登録する。
+    // 例外が起きたら、入力画面ではなく一覧画面に戻す
+    try {
+      todoService.create(todo);
+    } catch (BusinessException e) {
+      model.addAttribute(e.getResultMessages());
+      return list(model);
+    }
+
+    // 正常に更新が完了した場合、結果メッセージをflashスコープに追加して、一覧画面でリダイレクトする。
+    // PRGパターンにより、ブラウザ再読み込みをしてもPOSTが来ない。
+    redirectAttributes.addFlashAttribute(ResultMessages.success().add(
+        ResultMessage.fromText("Created successfully!")));
+
+    // PRGパターンのため、GETメソッドで完了画面が表示されるよう、リダイレクト。
+    return "redirect:/todo/sample2/complete2";
   }
   
 }
