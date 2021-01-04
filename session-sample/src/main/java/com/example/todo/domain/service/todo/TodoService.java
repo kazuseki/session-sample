@@ -18,4 +18,7 @@ public interface TodoService {
 
   // 削除
   void delete(String todoId);
+  
+  // sample2用。制限数に達していないかを確認する
+  void checkCount();
 }

@@ -100,4 +100,21 @@ public class TodoServiceImpl implements TodoService {
     Todo todo = findOne(todoId);
     todoRepository.delete(todo);
   }
+  
+  @Override
+  public void checkCount() {
+    
+    // 引数にfalseを入れることで、未完了のTodoの件数を取得する。
+    long unfinishedCount = todoRepository.countByFinished(false);
+
+    // 未完了のTodoは MAX_UNFINISHED_COUNT までしか許可しないので、
+    // 以上になっていたら例外をなげる。
+    if (unfinishedCount >= MAX_UNFINISHED_COUNT) {
+      ResultMessages messages = ResultMessages.error();
+      messages.add(ResultMessage
+          .fromText("[E001] 未完了のTodoの数は "
+              + MAX_UNFINISHED_COUNT + " 以上となってはいけません。"));
+      throw new BusinessException(messages);
+    }
+  }
 }
