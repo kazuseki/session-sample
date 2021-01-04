@@ -134,7 +134,7 @@ public class TodoSample1Controller {
     // PRGパターンにより、ブラウザ再読み込みをしてもPOSTが来ない。
     attributes.addFlashAttribute(ResultMessages.success().add(
         ResultMessage.fromText("Deleted successfully!")));
-    return "redirect:/todo/sampl1/list1";
+    return "redirect:/todo/sample1/list1";
   }
 
 }
