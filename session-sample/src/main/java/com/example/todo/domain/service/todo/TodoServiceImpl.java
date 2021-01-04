@@ -58,8 +58,8 @@ public class TodoServiceImpl implements TodoService {
     if (unfinishedCount >= MAX_UNFINISHED_COUNT) {
       ResultMessages messages = ResultMessages.error();
       messages.add(ResultMessage
-          .fromText("[E001] The count of un-finished Todo must not be over "
-              + MAX_UNFINISHED_COUNT + "."));
+          .fromText("[E001] 未完了のTodoの数は "
+              + MAX_UNFINISHED_COUNT + " 以上となってはいけません。"));
       throw new BusinessException(messages);
     }
 
@@ -85,7 +85,7 @@ public class TodoServiceImpl implements TodoService {
     if (todo.isFinished()) {
       ResultMessages messages = ResultMessages.error();
       messages.add(ResultMessage
-          .fromText("[E002] The requested Todo is already finished. (id="
+          .fromText("[E002] 指定したTodoは完了ステータスになっています。 (id="
               + todoId + ")"));
       throw new BusinessException(messages);
     }
