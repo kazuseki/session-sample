@@ -69,14 +69,25 @@
                                         method="post"
                                         modelAttribute="todoForm"
                                         cssClass="inline">  <!-- cssにより、Todoの横に表示させる -->
-                                        <!-- リクエストパラメータで表示しているtodoIdを送信する -->
+                                        <!-- リクエストパラメータで、表示しているtodoIdを送信する -->
                                         <form:hidden path="todoId"
                                             value="${f:h(todo.todoId)}" />
                                         <form:button>Finish</form:button>
                                     </form:form>
                             
             </c:otherwise>
-          </c:choose></li>
+          </c:choose>
+            <form:form
+               action="${pageContext.request.contextPath}/todo/sample1/delete1"
+               method="post"
+               modelAttribute="todoForm"
+               cssClass="inline">
+               <!-- リクエストパラメータで、表示しているtodoIdを送信する -->
+               <form:hidden path="todoId"
+                   value="${f:h(todo.todoId)}" />
+               <form:button>Delete</form:button>
+            </form:form>
+        </li>
       </c:forEach>
     </ul>
   </div>
