@@ -1,6 +1,7 @@
 package com.example.todo.app.sample1.todo;
 
 import com.example.todo.app.sample1.todo.TodoForm.TodoCreate;
+import com.example.todo.app.sample1.todo.TodoForm.TodoDelete;
 import com.example.todo.app.sample1.todo.TodoForm.TodoFinish;
 import com.example.todo.domain.model.Todo;
 import com.example.todo.domain.service.todo.TodoService;
@@ -108,4 +109,32 @@ public class TodoSample1Controller {
     return "redirect:/todo/sample1/list1";
   }
   
+
+  @PostMapping("delete1")
+  public String delete(
+      @Validated({ Default.class, TodoDelete.class }) TodoForm form,
+      BindingResult bindingResult,
+      Model model,
+      RedirectAttributes attributes) {
+
+    // 入力エラーがあった場合、一覧画面に戻る
+    if (bindingResult.hasErrors()) {
+      return list(model);
+    }
+
+    // 業務処理でBusinessExceptionが発生した場合は、結果メッセージをModelに追加して、一覧画面に戻る。
+    try {
+      todoService.delete(form.getTodoId());
+    } catch (BusinessException e) {
+      model.addAttribute(e.getResultMessages());
+      return list(model);
+    }
+
+    // 正常に更新が完了した場合、結果メッセージをflashスコープに追加して、一覧画面でリダイレクトする。
+    // PRGパターンにより、ブラウザ再読み込みをしてもPOSTが来ない。
+    attributes.addFlashAttribute(ResultMessages.success().add(
+        ResultMessage.fromText("Deleted successfully!")));
+    return "redirect:/todo/sampl1/list1";
+  }
+
 }
