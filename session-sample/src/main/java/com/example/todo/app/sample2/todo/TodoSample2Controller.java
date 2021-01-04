@@ -1,5 +1,6 @@
 package com.example.todo.app.sample2.todo;
 
+import com.example.todo.app.sample1.todo.TodoForm;
 import com.example.todo.domain.model.Todo;
 import com.example.todo.domain.service.todo.TodoService;
 import com.github.dozermapper.core.Mapper;
@@ -13,11 +14,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
-import org.springframework.web.bind.support.SessionStatus;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.terasoluna.gfw.common.exception.BusinessException;
-import org.terasoluna.gfw.common.message.ResultMessage;
-import org.terasoluna.gfw.common.message.ResultMessages;
 
 import java.util.Collection;
 
@@ -74,6 +71,22 @@ public class TodoSample2Controller {
     }
 
     return "todo/sample2/enter2";
+  }
+  
+  // 新規作成から次へを押して、確認画面を表示する。
+  // リクエストパラメータに event_proceed(進行中)があれば動く。
+  @PostMapping(value = "create" , params = "event_proceed")
+  public String showReview(@Validated @ModelAttribute("sessionTodoSample2Form") TodoForm todoForm,
+      BindingResult bindingResult,
+      Model model) {
+
+    // 入力値検証でエラーがあったら元の画面に返却する。
+    if(bindingResult.hasErrors()) {
+      return showEnterForm(model);
+    }
+
+    // 検証が通ったら確認画面へ。
+    return "todo/sample2/confirm2";
   }
   
 }
