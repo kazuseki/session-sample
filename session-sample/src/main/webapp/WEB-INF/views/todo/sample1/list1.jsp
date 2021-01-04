@@ -63,4 +63,9 @@
       </c:forEach>
     </ul>
   </div>
+  
+  <hr />
+  <div>
+      <a href="<c:url value='/' />">プロジェクトのTOPページへ戻る</a>
+  </div>
 </body>
