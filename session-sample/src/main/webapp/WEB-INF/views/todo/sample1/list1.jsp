@@ -17,7 +17,6 @@
       <!-- c:forEachタグを用いて、Todoのリストを箇条書きで全て表示する -->
       <c:forEach items="${todos}" var="todo">
         <li><c:choose>
-            <!-- 完了の場合(finished)、打ち消し線を装飾する -->
             <c:when test="${todo.finished}">
               <span class="strike"> ${f:h(todo.todoTitle)} </span>
             </c:when>
