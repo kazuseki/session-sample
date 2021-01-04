@@ -82,7 +82,7 @@ public class TodoSample2Controller {
   
   // 新規作成から次へを押して、確認画面を表示する。
   // リクエストパラメータに event_proceed(進行中)があれば動く。
-  @PostMapping(value = "create" , params = "event_proceed")
+  @PostMapping(value = "create2" , params = "event_proceed")
   public String showReview(@Validated @ModelAttribute("sessionTodoSample2Form") TodoForm todoForm,
       BindingResult bindingResult,
       Model model,
@@ -100,7 +100,7 @@ public class TodoSample2Controller {
   // 確認画面からOKを押して実際に登録する。
   // 完了後は完了画面へ。
   // 失敗したら入力画面ではなく、一覧画面に戻す
-  @PostMapping(value = "create" , params = "create_complete")
+  @PostMapping(value = "create2" , params = "create_complete")
   public String create(@ModelAttribute("sessionTodoSample2Form") TodoForm todoForm,
       Model model,
       RedirectAttributes redirectAttributes,
