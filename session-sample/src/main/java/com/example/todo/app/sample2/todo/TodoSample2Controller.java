@@ -128,6 +128,6 @@ public class TodoSample2Controller {
   public String cancel(SessionStatus sessionStatus) {
     // キャンセルするとき、セッションに残っているtodoFormオブジェクトを削除する。
     sessionStatus.setComplete();
-    return "redirect:/todo/sample/create";
+    return "redirect:/todo/sample2/create2";
   }
 }
