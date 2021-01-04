@@ -145,6 +145,6 @@ public class TodoSample2Controller {
     // ModelAttribute("sessionTodoForm")オブジェクトはクライアントにレスポンスが返るまで
     // requestスコープで有効なので、完了画面を初めて表示するまでは、JSPで表示できる。
     // 完了画面でページ更新(ブラウザでF5など)を行うと、表示は消えてしまう。
-    return "todo/sample/complete2";
+    return "todo/sample2/complete2";
   }
 }
