@@ -29,6 +29,17 @@
                                     ${f:h(todo.todoTitle)}
             </c:otherwise>
           </c:choose>
+          <!-- 編集用のボタンを表示してformを送る -->
+            <form:form
+              action="${pageContext.request.contextPath}/todo/sample2/edit2"
+              method="post"
+              modelAttribute="sessionTodoSample2Form"
+              cssClass="inline">  <!-- cssにより、Todoの横に表示させる -->
+              <!-- リクエストパラメータで、表示しているtodoIdを送信する -->
+                <form:hidden path="todoId"
+                   value="${f:h(todo.todoId)}" />
+                   <form:button>edit</form:button>
+                </form:form>
         </li>
       </c:forEach>
     </ul>
