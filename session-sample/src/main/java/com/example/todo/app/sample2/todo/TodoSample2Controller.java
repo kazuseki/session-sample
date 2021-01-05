@@ -128,11 +128,9 @@ public class TodoSample2Controller {
   }
   
   // 確認画面からキャンセルを押したときに使われる。
-  // ゴミを削除して再度、新規作成画面へ。
+  // 再度、新規作成画面へ。
   @PostMapping(value = "create2" , params = "create_cancel")
   public String cancel(SessionStatus sessionStatus) {
-    // キャンセルするとき、セッションに残っているtodoFormオブジェクトを削除する。
-    sessionStatus.setComplete();
     return "redirect:/todo/sample2/create2";
   }
   
