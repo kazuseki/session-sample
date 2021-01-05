@@ -9,7 +9,7 @@ import java.util.Collection;
 public interface EntityRepository {
   
   // 1件取得
-  Entity findOne(String wizardId);
+  Entity findOne(int wizardId);
 
   // 全件取得
   Collection<Entity> findAll();

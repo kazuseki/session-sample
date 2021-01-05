@@ -12,10 +12,10 @@ import java.util.concurrent.ConcurrentHashMap;
 @Repository
 public class EntityRepositoryImpl implements EntityRepository {
 
-  private static final Map<String, Entity> ENTITY_MAP = new ConcurrentHashMap<>();
+  private static final Map<Integer, Entity> ENTITY_MAP = new ConcurrentHashMap<>();
 
   @Override
-  public Entity findOne(String wizardId) {
+  public Entity findOne(int wizardId) {
     return ENTITY_MAP.get(wizardId);
   }
 

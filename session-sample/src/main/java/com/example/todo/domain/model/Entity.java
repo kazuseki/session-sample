@@ -7,7 +7,7 @@ public class Entity implements Serializable {
 
   private static final long serialVersionUID = 1L;
   
-  private String wizardId;
+  private int wizardId;
   
   private String field1;
 
@@ -15,11 +15,11 @@ public class Entity implements Serializable {
 
   private String field3;
 
-  public String getWizardId() {
+  public int getWizardId() {
     return wizardId;
   }
 
-  public void setWizardId(String wizardId) {
+  public void setWizardId(int wizardId) {
     this.wizardId = wizardId;
   }
 

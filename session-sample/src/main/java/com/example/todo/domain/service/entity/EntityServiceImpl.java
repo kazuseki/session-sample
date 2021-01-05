@@ -6,7 +6,7 @@ import com.example.todo.domain.repository.entity.EntityRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
-import java.util.UUID;
+import java.util.Random;
 
 import javax.inject.Inject;
 
@@ -26,7 +26,7 @@ public class EntityServiceImpl implements EntityService {
   public Entity create(Entity entity) {
     
     // 作成用にIdにランダムな値を設定
-    String wizardId = UUID.randomUUID().toString();
+    int wizardId = new Random().nextInt(100);
     entity.setWizardId(wizardId);
     // 他のフィールドは渡されたときに入ってくる。
     
@@ -41,8 +41,13 @@ public class EntityServiceImpl implements EntityService {
   }
 
   @Override
-  public void delete(String wizardId) {
+  public void delete(int wizardId) {
     Entity entity = entityRepository.findOne(wizardId);
     entityRepository.delete(entity);
+  }
+
+  @Override
+  public Entity getEntity(int wizardId) {
+    return entityRepository.findOne(wizardId);
   }
 }

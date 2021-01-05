@@ -18,5 +18,8 @@ public interface EntityService {
   Entity update(Entity entity);
 
   // 削除
-  void delete(String wizardId);
+  void delete(int wizardId);
+  
+  // 1件取得
+  Entity getEntity(int wizardId);
 }
