@@ -14,7 +14,7 @@
     <ul>
       <li><a href="<c:url value='/todo/sample1/list1' />">sample1 のURL /todo/sample1/list1 へ (TodoSample1Controllerを利用)</a></li>
       <li><a href="<c:url value='/todo/sample2/list2' />">sample2 のURL /todo/sample2/list2 へ (TodoSample2Controllerを利用)</a></li>
-      <li><a href="<c:url value='/todo/sample3/list3' />">sample3 のURL /todo/sample3/list3 へ (TodoSample3Controllerを利用)</a></li>
+      <li><a href="<c:url value='/wizard/create' />">sample3 のURL /wizard/create へ (WizardControllerを利用)</a></li>
     </ul>
   </div>
 </body>
