@@ -1,6 +1,5 @@
 package com.example.todo.app.sample2.todo;
 
-import com.example.todo.app.sample1.todo.TodoForm;
 import com.example.todo.domain.model.Todo;
 import com.example.todo.domain.service.todo.TodoService;
 import com.github.dozermapper.core.Mapper;
@@ -130,7 +129,7 @@ public class TodoSample2Controller {
   // 確認画面からキャンセルを押したときに使われる。
   // 再度、新規作成画面へ。
   @PostMapping(value = "create2" , params = "create_cancel")
-  public String cancel(SessionStatus sessionStatus) {
+  public String cancel() {
     return "redirect:/todo/sample2/create2";
   }
   
@@ -144,5 +143,13 @@ public class TodoSample2Controller {
     // requestスコープで有効なので、完了画面を初めて表示するまでは、JSPで表示できる。
     // 完了画面でページ更新(ブラウザでF5など)を行うと、表示は消えてしまう。
     return "todo/sample2/complete2";
+  }
+  
+  
+  // 既存のTodoの編集画面
+  @PostMapping(value = "edit2" , params = "todoId")
+  public String showEdit(@ModelAttribute("sessionTodoSample2Form") TodoSample2Form todoSample2Form) {
+
+    return "todo/sample2/edit2";
   }
 }
