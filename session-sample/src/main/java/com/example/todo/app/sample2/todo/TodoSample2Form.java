@@ -25,4 +25,13 @@ public class TodoSample2Form implements Serializable {
   public void setTodoTitle(String todoTitle) {
       this.todoTitle = todoTitle;
   }
+
+  public String getTodoId() {
+    return todoId;
+  }
+
+  public void setTodoId(String todoId) {
+    this.todoId = todoId;
+  }
+  
 }
