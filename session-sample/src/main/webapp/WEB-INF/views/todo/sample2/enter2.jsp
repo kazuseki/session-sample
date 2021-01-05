@@ -19,7 +19,7 @@
             modelAttribute="sessionTodoSample2Form" > <!-- セッションにある TodoSample2Formの指定した属性名をバインド -->
            
             <!-- form:inputタグでフォームのプロパティにバインドする -->
-            <form:input path="todoTitle" />
+            <form:input path="todoTitle" value="${f:h(sessionTodoSample2Form.todoTitle)}" />
            
             <!-- form:errorsタグで入力エラーがあった場合に表示する -->
             <form:errors path="todoTitle" cssClass="text-error" />
@@ -30,7 +30,14 @@
     </div>
     <hr />
     <div>
-        <a href="<c:url value='/' />">TOPページに戻る</a>
+        <ul>
+            <li>
+                <a href="<c:url value='/todo/sample2/list2' />">一覧表示へ戻る</a>
+            </li>
+            <li>
+                <a href="<c:url value='/' />">TOPページに戻る</a>
+            </li>
+        </ul>
     </div>
 </body>
 </html>
